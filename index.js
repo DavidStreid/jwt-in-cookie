@@ -11,31 +11,34 @@ class JwtInCookie {
     constructor(secret, timeoutDuration) {
         this.#secret = secret;
         this.#timeoutDuration = timeoutDuration;
-        this.#tokenKey = 'jic';     // Default cookie key for JWT is 'jic'
+        this.#tokenKey = "jic";     // Default cookie key for JWT
     }
 
     getTokenKey() {
         return this.#tokenKey;
     }
-    getTimeout(){
+
+    getTimeout() {
         return this.#timeoutDuration
     }
+
     getSecret() {
         return this.#secret;
     }
 }
+
 // Define a default instance cookie. Will be set in the configure method
-let instance = new JwtInCookie('', DEFAULT_TIMEOUT_DURATION);
+let instance = new JwtInCookie("", DEFAULT_TIMEOUT_DURATION);
 
 /**
  * Configures the instance w/ a secret and optional timeout duration
  *
- * @param config, { secret: '', timeoutDuration: '' }
+ * @param config, { secret: "", timeoutDuration: "" }
  */
-exports.configure = function(config) {
-    const secret = config['secret'];
-    let timeout = config['timeoutDuration'] || DEFAULT_TIMEOUT_DURATION;
-    if(!secret){
+exports.configure = function (config) {
+    const secret = config["secret"];
+    let timeout = config["timeoutDuration"] || DEFAULT_TIMEOUT_DURATION;
+    if (!secret) {
         throw new Error("Secret must be specified");
     }
     instance = new JwtInCookie(secret, timeout);
@@ -46,11 +49,11 @@ exports.configure = function(config) {
  *
  * @param res
  */
-exports.addCookieToken = function(res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
+exports.addCookieToken = function (res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
     const encodedToken = encodePayload(payload);
     res.cookie(instance.getTokenKey(), encodedToken, cookieOptions);
     return res;
-}
+};
 
 /**
  * Encodes input payload as token
@@ -58,7 +61,7 @@ exports.addCookieToken = function(res, payload, cookieOptions = {httpOnly: true,
  * @param payload
  * @returns {undefined|*}
  */
-const encodePayload = function(payload) {
+const encodePayload = function (payload) {
     const jwtData = {
         expiresIn: instance.getTimeout()
     };
@@ -73,13 +76,13 @@ exports.encodePayload = encodePayload;
  * @param req - express request
  * @returns {*}
  */
-const retrieveTokenFromCookie = function(req) {
+const retrieveTokenFromCookie = function (req) {
     const token = req.cookies[instance.getTokenKey()];
     if (token === undefined || token === null) {
         throw new Error("JWT Token not defined in cookie");
     }
     jwt.verify(token, instance.getSecret(), function (err, decoded) {
-        if(err) {
+        if (err) {
             throw new Error("Invalid JWT Token");
         }
     });
@@ -92,7 +95,7 @@ exports.retrieveTokenFromCookie = retrieveTokenFromCookie;
  * @param req
  * @returns {*}
  */
-exports.validateRequestCookie = function(req) {
+exports.validateRequestCookie = function (req) {
     retrieveTokenFromCookie(req);
     return true;
 };

@@ -1,7 +1,8 @@
 {
   "name": "jwt-in-cookie",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Wrapper around the functionality of jsonwebtoken to easily set and validate JWT tokens in express requests/responses",
+  "homepage": "https://github.com/DavidStreid/jwt-in-cookie",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
