@@ -36,7 +36,7 @@ Return: void
 * `secret`: string (required), secret to be used to sign the JWT 
   > Eg: `abcdefghijklmnopqrstuvwxyz1234567890`
 * `timeoutDuration`: string, length of time before signed data expires
-  > Eg: `2 hours`
+  > Eg: `"2 hours"`,  `"1d"`, `"20h"`, `60`
 
 ### jwtInCookie.addCookieToken(res, payload, cookieOptions)
 
