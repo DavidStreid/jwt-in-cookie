@@ -5,13 +5,22 @@
   "homepage": "https://github.com/DavidStreid/jwt-in-cookie",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
-  "keywords": [],
+  "keywords": [
+    "jwt",
+    "cookie",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.5",
     "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1",
+    "sinon": "^9.0.1"
   }
 }
