@@ -14,7 +14,7 @@ describe("JWT-in-cookie tests", function () {
             }
         };
 
-        expect(() => jwtInCookie.validateRequestCookie(req)).to.not.throw();
+        expect(() => jwtInCookie.validateJwtToken(req)).to.not.throw();
     });
 
     it("Payload signed w/ different secret throws error", function () {
@@ -30,6 +30,6 @@ describe("JWT-in-cookie tests", function () {
         // Re-configure
         jwtInCookie.configure({secret: "1234567abcdefghijklmnopqrstuvwxyz"});
 
-        expect(() => jwtInCookie.validateRequestCookie(req)).to.throw();
+        expect(() => jwtInCookie.validateJwtToken(req)).to.throw();
     });
 });

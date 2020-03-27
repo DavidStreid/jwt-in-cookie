@@ -11,7 +11,7 @@ jwtInCookie.configure({secret: 'MY_SECRET'});
 ### 2) Setting JWT in request-cookie
 ```
 function (req, res) {
-    jwtInCookie.addCookieToken(res, data);
+    jwtInCookie.setJwtToken(res, data);
     ...
 }
 ```
@@ -19,7 +19,7 @@ function (req, res) {
 ### 3) Validating JWT in response
 ```
 function (req, res) {
-    jwtInCookie.validateRequestCookie(req);
+    jwtInCookie.validateJwtToken(req);
     ...
 }
 
@@ -38,7 +38,7 @@ Return: void
 * `timeoutDuration`: string, length of time before signed data expires
   > Eg: `"2 hours"`,  `"1d"`, `"20h"`, `60`
 
-### jwtInCookie.addCookieToken(res, payload, cookieOptions)
+### jwtInCookie.setJwtToken(res, payload, cookieOptions)
 
 Adds payload as a token in the response cookie using configured secret & options
 
@@ -70,7 +70,7 @@ Return: encoded token
   
 `req` [express request object](https://expressjs.com/en/api.html#req)  
 
-### jwtInCookie.validateRequestCookie(req)
+### jwtInCookie.validateJwtToken(req)
 
 Returns whether request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
 

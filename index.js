@@ -49,7 +49,7 @@ exports.configure = function (config) {
  *
  * @param res
  */
-exports.addCookieToken = function (res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
+exports.setJwtToken = function (res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
     const encodedToken = encodePayload(payload);
     res.cookie(instance.getTokenKey(), encodedToken, cookieOptions);
     return res;
@@ -91,11 +91,12 @@ const retrieveTokenFromCookie = function (req) {
 exports.retrieveTokenFromCookie = retrieveTokenFromCookie;
 
 /**
- * Returns true if the request has a valid token
+ * Returns true if the request has a valid token in its cookie
+ *
  * @param req
  * @returns {*}
  */
-exports.validateRequestCookie = function (req) {
+exports.validateJwtToken = function (req) {
     retrieveTokenFromCookie(req);
     return true;
 };
