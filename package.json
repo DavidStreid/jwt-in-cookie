@@ -1,0 +1,16 @@
+{
+  "name": "jwt-in-cookie",
+  "version": "1.0.8",
+  "description": "Wrapper around the functionality of jsonwebtoken to easily set and validate JWT tokens in express requests/responses",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
