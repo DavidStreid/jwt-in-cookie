@@ -44,11 +44,22 @@ Adds payload as a token in the response cookie using configured secret & options
 
 Return: string, token of payload
 
-`res` [express response object](https://expressjs.com/en/api.html#res)  
+`res` [express response object](https://expressjs.com/en/api.html#res)
+  
 `payload` object
+
 `cookieOptions` object, options that set in the cookie 
 * `httpOnly`: boolean, javascript can't access the cookie
 * `expires`: number, time until the cookie expires (if 0, will expire at end of session)
+
+### jwtInCookie.validateJwtToken(req)
+
+Returns whether request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
+
+Return: boolean
+  
+`req` [express request object](https://expressjs.com/en/api.html#req)  
+
 
 ### jwtInCookie.encodePayload(payload)  
 
@@ -57,23 +68,11 @@ Encodes payload using configured secret & options
 Return: encoded payload
 
 `payload` object
-`cookieOptions` object, options that set in the cookie 
-* `httpOnly`: boolean, javascript can't access the cookie
-* `expires`: number, time until the cookie expires (if 0, will expire at end of session)
-const encodePayload = function(payload)
 
 ### jwtInCookie.retrieveTokenFromCookie(req)
 
 Retrieves the JWT from the input request's cookie (must be preceded by `jwtInCookie.configure`)
 
 Return: encoded token
-  
-`req` [express request object](https://expressjs.com/en/api.html#req)  
-
-### jwtInCookie.validateJwtToken(req)
-
-Returns whether request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
-
-Return: boolean
   
 `req` [express request object](https://expressjs.com/en/api.html#req)  

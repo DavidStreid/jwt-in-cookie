@@ -1,6 +1,6 @@
 {
   "name": "jwt-in-cookie",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Wrapper around the functionality of jsonwebtoken to easily set and validate JWT tokens in express requests/responses",
   "homepage": "https://github.com/DavidStreid/jwt-in-cookie",
   "main": "index.js",
