@@ -1,6 +1,6 @@
 {
   "name": "jwt-in-cookie",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Wrapper around the functionality of jsonwebtoken to easily set and validate JWT tokens in express requests/responses",
   "homepage": "https://github.com/DavidStreid/jwt-in-cookie",
   "main": "index.js",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.1.1",
+    "node-mocks-http": "^1.8.1",
     "sinon": "^9.0.1"
   }
 }
