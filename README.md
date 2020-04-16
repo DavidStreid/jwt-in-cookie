@@ -54,9 +54,9 @@ Return: string, token of payload
 
 ### jwtInCookie.validateJwtToken(req)
 
-Returns whether request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
+Returns decoded token if request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
 
-Return: boolean
+Return: object
   
 `req` [express request object](https://expressjs.com/en/api.html#req)  
 
@@ -71,8 +71,8 @@ Return: encoded payload
 
 ### jwtInCookie.retrieveTokenFromCookie(req)
 
-Retrieves the JWT from the input request's cookie (must be preceded by `jwtInCookie.configure`)
+Retrieves decoded token from the input request's cookie (must be preceded by `jwtInCookie.configure`)
 
-Return: encoded token
+Return: decoded token
   
 `req` [express request object](https://expressjs.com/en/api.html#req)  

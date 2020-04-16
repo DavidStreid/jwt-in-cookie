@@ -81,22 +81,23 @@ const retrieveTokenFromCookie = function (req) {
     if (token === undefined || token === null) {
         throw new Error("JWT Token not defined in cookie");
     }
-    jwt.verify(token, instance.getSecret(), function (err, decoded) {
+    const decodedToken = jwt.verify(token, instance.getSecret(), function (err, decoded) {
         if (err) {
             throw new Error("Invalid JWT Token");
         }
+        return decoded
     });
-    return token;
+    return decodedToken;
 };
 exports.retrieveTokenFromCookie = retrieveTokenFromCookie;
 
 /**
- * Returns true if the request has a valid token in its cookie
+ * Returns decoded token if the request has a valid token in its cookie
  *
  * @param req
  * @returns {*}
  */
 exports.validateJwtToken = function (req) {
-    retrieveTokenFromCookie(req);
-    return true;
+    const decodedToken = retrieveTokenFromCookie(req);
+    return decodedToken;
 };
