@@ -45,4 +45,19 @@ describe("JWT-in-cookie tests", function () {
         const encodedPayload = jwtInCookie.encodePayload(payload);
         expect(res.cookies['jic'].value).to.equal(encodedPayload);
     });
+
+    it("clearToken: JWT is cleared after being set", function () {
+        const secret = "abcdefghijklmnopqrstuvwxyz1234567";
+        const payload = {"foo": "bar"};
+
+        const res = httpMocks.createResponse();
+        jwtInCookie.configure({secret});
+        jwtInCookie.setJwtToken(res, payload);
+
+        const encodedPayload = jwtInCookie.encodePayload(payload);
+        expect(res.cookies['jic'].value).to.equal(encodedPayload);
+
+        jwtInCookie.clearToken(res);
+        expect(res.cookies['jic'].value).to.equal('');
+    });
 });

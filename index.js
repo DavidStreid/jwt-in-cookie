@@ -56,6 +56,19 @@ exports.setJwtToken = function (res, payload, cookieOptions = {httpOnly: true, e
 };
 
 /**
+ * Removes the JWT token from the express response's cookie. Used for log-out
+ *
+ * @param res
+ * @param payload
+ * @param cookieOptions
+ * @returns {*}
+ */
+exports.clearToken = function (res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
+    res.cookie(instance.getTokenKey(), "", cookieOptions);
+    return res;
+};
+
+/**
  * Encodes input payload as token
  *
  * @param payload
