@@ -63,7 +63,7 @@ exports.setJwtToken = function (res, payload, cookieOptions = {httpOnly: true, e
  * @param cookieOptions
  * @returns {*}
  */
-exports.clearToken = function (res, payload, cookieOptions = {httpOnly: true, expires: 0}) {
+exports.clearToken = function (res, cookieOptions = {httpOnly: true, expires: 0}) {
     res.cookie(instance.getTokenKey(), "", cookieOptions);
     return res;
 };
