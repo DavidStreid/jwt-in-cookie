@@ -22,8 +22,16 @@ function (req, res) {
     jwtInCookie.validateJwtToken(req);
     ...
 }
-
 ```
+
+### 4) Clear JWT token on user-logout
+```
+function (req, res) {
+    jwtInCookie.clearToken(res);
+    ...
+}
+```
+
 ## API
 
 ### jwtInCookie.configure(config)
@@ -52,6 +60,14 @@ Return: string, token of payload
 * `httpOnly`: boolean, javascript can't access the cookie
 * `expires`: number, time until the cookie expires (if 0, will expire at end of session)
 
+### jwtInCookie.clearToken(res)
+
+Clears the jwt token from the response
+
+Return: void
+  
+`res` [express response object](https://expressjs.com/en/api.html#res)
+
 ### jwtInCookie.validateJwtToken(req)
 
 Returns decoded token if request contains a valid JWT in its cookie (must be preceded by `jwtInCookie.configure`)
@@ -59,7 +75,6 @@ Returns decoded token if request contains a valid JWT in its cookie (must be pre
 Return: object
   
 `req` [express request object](https://expressjs.com/en/api.html#req)  
-
 
 ### jwtInCookie.encodePayload(payload)  
 

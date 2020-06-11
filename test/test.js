@@ -9,12 +9,7 @@ describe("JWT-in-cookie tests", function () {
         const payload = {"foo": "bar"};
         jwtInCookie.configure({secret, timeoutDuration});
 
-        const req = {
-            cookies: {
-                "jic": jwtInCookie.encodePayload(payload)
-            }
-        };
-
+        const req = httpMocks.createRequest({cookies: { "jic": jwtInCookie.encodePayload(payload) }});
         expect(() => jwtInCookie.validateJwtToken(req)).to.not.throw();
     });
 
@@ -22,11 +17,7 @@ describe("JWT-in-cookie tests", function () {
         const secret = "abcdefghijklmnopqrstuvwxyz1234567";
         const payload = {"foo": "bar"};
         jwtInCookie.configure({secret});
-        const req = {
-            cookies: {
-                "jic": jwtInCookie.encodePayload(payload)
-            }
-        };
+        const req = httpMocks.createRequest({cookies: { "jic": jwtInCookie.encodePayload(payload) }});
 
         // Re-configure
         jwtInCookie.configure({secret: "1234567abcdefghijklmnopqrstuvwxyz"});
@@ -44,5 +35,25 @@ describe("JWT-in-cookie tests", function () {
 
         const encodedPayload = jwtInCookie.encodePayload(payload);
         expect(res.cookies['jic'].value).to.equal(encodedPayload);
+    });
+
+    it("clearToken: JWT is cleared, i.e. set to blank string, after being set", function () {
+        const secret = "abcdefghijklmnopqrstuvwxyz1234567";
+        const payload = {"foo": "bar"};
+
+        const res = httpMocks.createResponse();
+        jwtInCookie.configure({secret});
+        jwtInCookie.setJwtToken(res, payload);
+
+        const encodedPayload = jwtInCookie.encodePayload(payload);
+        expect(res.cookies['jic'].value).to.equal(encodedPayload);
+
+        jwtInCookie.clearToken(res);
+        expect(res.cookies['jic'].value).to.equal('');
+    });
+
+    it("validateJwtToken (after clearToken): Error thrown if JWT is a blank string", function () {
+        const req = httpMocks.createRequest({cookies: { "jic": "" }});
+        expect(() => jwtInCookie.validateJwtToken(req)).to.throw();
     });
 });
